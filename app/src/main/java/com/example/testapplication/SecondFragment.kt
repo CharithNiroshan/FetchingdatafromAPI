@@ -1,7 +1,7 @@
 package com.example.testapplication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,12 +52,13 @@ class SecondFragment : Fragment() {
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
             }
 
+            @SuppressLint("WrongConstant")
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 if (response.isSuccessful){
                     Toast.makeText(context, "SUCCESSFUL", Toast.LENGTH_SHORT).show()
                     var postlist : List <Post> = response.body() as List<Post>
                     val recyclerview = view?.findViewById<RecyclerView>(R.id.list)
-                    //recyclerview.layoutManager =LinearLayoutManager(this,RecyclerView.VERTICAL,false)
+                    recyclerview.layoutManager =LinearLayoutManager(this,LinearLayout.VERTICAL,true)
 
                     var adapter= Adapter(postlist)
                     recyclerview?.adapter =adapter
